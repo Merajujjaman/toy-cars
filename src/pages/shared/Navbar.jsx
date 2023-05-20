@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from '../../assets/car-logo.png'
+import logo from '../../assets/logo-f.jpg'
 
 const Navbar = () => {
     const navItems = <>
@@ -21,7 +21,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div>
-                        <img src={logo} alt="logo" className="w-12" />
+                        <img src={logo} alt="logo" className="w-24" />
                         <p className="font-extrabold">Toy Cars</p>
                     </div>
                 </div>

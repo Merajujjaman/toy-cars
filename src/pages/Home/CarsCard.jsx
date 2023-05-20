@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 
 const CarsCard = ({ singleCar }) => {
-    const { toy_name, price, rating, picture } = singleCar
+    const { _id,toy_name, price, rating, picture } = singleCar
     return (
 
         <div className="card w-full bg-base-100 shadow-xl">
@@ -13,9 +14,10 @@ const CarsCard = ({ singleCar }) => {
                     <div className="badge badge-secondary">Raring: {rating}</div>
                 </h2>
                 <p className="text-green-500">price: {price}</p>
-                <div className="card-actions justify-end">
-                    <div className="btn btn-outline">Details</div>
-                </div>
+                
+                <Link to={`/carDetails/${_id}`} className="card-actions justify-end">
+                    <button className="btn btn-outline">Details</button>
+                </Link>
             </div>
         </div>
 

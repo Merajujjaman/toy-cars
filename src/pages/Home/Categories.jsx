@@ -5,7 +5,7 @@ import CarsCard from "./CarsCard";
 const Categories = () => {
     const [category, setCategory] =useState('Sports')
     const  [carsData, setCarsData] =useState([])
-    console.log(carsData);
+    // console.log(carsData);
 
     useEffect(() => {
         fetch(`http://localhost:5000/cars/${category}`)
