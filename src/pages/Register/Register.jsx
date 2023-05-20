@@ -1,16 +1,31 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProviders";
 
 
 const Register = () => {
+
+    const { createAccount } = useContext(AuthContext)
+
     const handleRegister = e => {
         e.preventDefault()
         const form = e.target;
-        const name = form.name.value;
+        // const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        const photo = form.photo.value;
+        // const photo = form.photo.value;
+        // console.log(name,email,password, photo);
 
-        console.log(name,email,password, photo);
+        createAccount(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset()
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -40,13 +55,13 @@ const Register = () => {
                         <label className="label">
                             <span className="label-text">Photo Url</span>
                         </label>
-                        <input type="url" name="photo" placeholder="photo url" className="input input-bordered "  />
+                        <input type="url" name="photo" placeholder="photo url" className="input input-bordered " />
                     </div>
                     <div className="form-control mt-4">
                         <button className="btn btn-primary">Login</button>
                     </div>
                 </form>
-                <p className='text-center mb-4'>Alrady have an accout? <Link className='font-bold text-info'to='/login'>Login</Link></p>
+                <p className='text-center mb-4'>Alrady have an accout? <Link className='font-bold text-info' to='/login'>Login</Link></p>
 
             </div>
 
