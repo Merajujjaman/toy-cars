@@ -1,12 +1,25 @@
 import { Link } from "react-router-dom";
 import logo from '../../assets/logo-f.jpg'
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProviders";
+import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogeOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
     const navItems = <>
-        <li><Link>Home</Link></li> 
-        <li><Link>Blog</Link></li> 
-        <li><Link>All Toys</Link></li> 
-        
+        <li><Link>Home</Link></li>
+        <li><Link>Blog</Link></li>
+        <li><Link>All Toys</Link></li>
+
     </>
     return (
         <div>
@@ -27,11 +40,20 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                       {navItems}
+                        {navItems}
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to='/login' className="btn btn-outline btn-primary">Login</Link>
+                    { user&&
+                        <FaUserCircle className="text-4xl me-4 "></FaUserCircle>    
+                    }
+                    {user ?
+                        <Link onClick={handleLogeOut} className="btn btn-outline btn-primary">log Out</Link>
+                        :
+                        <Link to='/login' className="btn btn-outline btn-primary">Login</Link>
+                    }
+
+
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 
 
 const Login = () => {
@@ -66,7 +67,10 @@ const Login = () => {
 
                 <div className="divider">OR</div>
 
-                <button className="btn mb-4 btn-outline w-4/5 mx-auto ">Login with Google</button>
+
+
+                <button className="btn mb-4 btn-outline w-4/5 mx-auto "> <FcGoogle className="mx-2"></FcGoogle> Login with Google</button>
+
 
             </div>
 
