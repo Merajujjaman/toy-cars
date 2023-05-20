@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
+import Swal from "sweetalert2";
 
 
 const Register = () => {
-
+    const [error, setError] = useState('')
     const { createAccount } = useContext(AuthContext)
 
     const handleRegister = e => {
@@ -20,10 +21,19 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                setError('')
                 form.reset()
+                Swal.fire({
+                    position: 'middle',
+                    icon: 'success',
+                    title: 'Welcome !',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
             .catch(error => {
                 console.log(error);
+                setError(error.message)
             })
 
     }
@@ -58,9 +68,11 @@ const Register = () => {
                         <input type="url" name="photo" placeholder="photo url" className="input input-bordered " />
                     </div>
                     <div className="form-control mt-4">
-                        <button className="btn btn-primary">Login</button>
+                        <button className="btn btn-primary">Create</button>
                     </div>
                 </form>
+                {error && <p className="text-center text-error font-bold">{error}</p>
+                }
                 <p className='text-center mb-4'>Alrady have an accout? <Link className='font-bold text-info' to='/login'>Login</Link></p>
 
             </div>

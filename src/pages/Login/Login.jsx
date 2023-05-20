@@ -1,18 +1,40 @@
 
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProviders";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
+    const [error, setError] = useState('')
+    const { loginWithEmail } = useContext(AuthContext)
 
     const handleLogin = e => {
         e.preventDefault()
         const form = e.target;
-        
         const email = form.email.value;
         const password = form.password.value;
-        
+        console.log(email, password);
 
-        console.log(email,password);
+        loginWithEmail(email, password)
+            .then(result => {
+                const logedUser = result.user;
+                form.reset()
+                setError('')
+                console.log(logedUser);
+                Swal.fire({
+                    position: 'middle',
+                    icon: 'success',
+                    title: 'Login Successfull...',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error.message)
+            })
+
     }
 
 
@@ -38,7 +60,9 @@ const Login = () => {
                         <button className="btn btn-primary">Login</button>
                     </div>
                 </form>
-                <p className='text-center mb-4'>Don not have an accout? <Link className='font-bold text-seccess'to='/register'>Sign Up</Link></p>
+                {error && <p className="text-center text-error font-bold">{error}</p>
+                }
+                <p className='text-center mb-4'>Don not have an accout? <Link className='font-bold text-info' to='/register'>Create Account</Link></p>
 
                 <div className="divider">OR</div>
 
