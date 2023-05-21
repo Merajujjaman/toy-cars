@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
+import Swal from "sweetalert2";
 
 const AddToys = () => {
     const { user } = useContext(AuthContext)
@@ -7,16 +8,56 @@ const AddToys = () => {
     const handleAddToy = e => {
         e.preventDefault()
         const form = e.target
-        const toy_name =form.toy_name.value;
-        const seller_name =form.seller_name.value;
-        const category =form.category.value;
-        const seller_email =form.seller_email.value;
-        const price =form.price.value;
-        const rating =form.rating.value;
-        const details =form.details.value;
-        const photo =form.photo_url.value;
-        console.log(toy_name, seller_name, seller_email, category,price, rating,details, photo);
+
+        const toy_name = form.toy_name.value;
+        const seller_name = form.seller_name.value;
+        const category = form.category.value;
+        const seller_email = form.seller_email.value;
+        const price = form.price.value;
+        const rating = form.rating.value;
+        const details = form.details.value;
+        const photo = form.photo_url.value;
+        // console.log(toy_name, seller_name, seller_email, category,price, rating,details, photo);
+
+        const addToyData = {
+            toy_name,
+            category,
+            seller_name,
+            seller_email,
+            price,
+            rating,
+            details,
+            photo
+        }
+
+        fetch('http://localhost:5000/addToy', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(addToyData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if(data.acknowledged){
+                    Swal.fire({
+                        position: 'middle',
+                        icon: 'success',
+                        title: 'upload seccessfull',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+
     }
+
+
     return (
         <div>
             <h1 className="text-3xl font-bold text-center my-4">Add Your Toy</h1>
@@ -35,8 +76,8 @@ const AddToys = () => {
                         <label className="label">
                             <span className="label-text">Toy Category</span>
                         </label>
-                        <select name="category" className="select w-full max-w-xs">
-                            <option disabled selected>Select Category</option>
+                        <select name="category" className="select w-full max-w-xs" >
+                            <option disabled selected >Select Category</option>
                             <option value='Sports'>Sports Car</option>
                             <option value='Police'>Police Car</option>
                             <option value='Truck'>Truck</option>
@@ -85,7 +126,7 @@ const AddToys = () => {
                         <input type="url" name="photo_url" placeholder="enter toys quantity" className="input input-bordered" required />
                     </div>
 
-                    
+
 
                 </div>
 
@@ -97,7 +138,7 @@ const AddToys = () => {
                 </div>
 
                 <div className="form-control mt-6">
-                    <input className="btn btn-primary btn-block" type="submit" value="Order confirm" />
+                    <input className="btn btn-primary btn-block" type="submit" value="Upload" />
                 </div>
             </form>
         </div>
