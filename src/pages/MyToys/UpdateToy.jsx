@@ -1,11 +1,17 @@
 import { useContext } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
 
-const AddToys = () => {
-    const { user } = useContext(AuthContext)
 
-    const handleAddToy = e => {
+const UpdateToy = () => {
+    const navigate = useNavigate()
+    const data = useLoaderData()
+    const { user } = useContext(AuthContext)
+    // console.log(data);
+    const { toy_name, seller_name, price, quantity, _id } = data
+
+    const handleUpdateToy = e => {
         e.preventDefault()
         const form = e.target
 
@@ -14,35 +20,30 @@ const AddToys = () => {
         const category = form.category.value;
         const seller_email = form.seller_email.value;
         const price = form.price.value;
-        const rating = form.rating.value;
         const quantity = form.quantity.value;
-        const details = form.details.value;
-        const photo = form.photo_url.value;
-        // console.log(toy_name, seller_name, seller_email, category,price, rating,details, photo);
 
-        const addToyData = {
+        const updateToyData = {
             toy_name,
             category,
             seller_name,
             seller_email,
             price,
-            rating,
-            quantity,
-            details,
-            photo
-        }
+            quantity
 
-        fetch('http://localhost:5000/addToy', {
-            method: 'POST',
+        }
+        console.log(updateToyData);
+
+        fetch(`http://localhost:5000/seller/${_id}`, {
+            method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(addToyData)
+            body: JSON.stringify(updateToyData)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if(data.acknowledged){
+                if (data.modifiedCount > 0) {
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -50,28 +51,26 @@ const AddToys = () => {
                         showConfirmButton: false,
                         timer: 1500
                     })
+                    navigate('/myToys')
+
                 }
             })
-            .catch(error => {
-                console.log(error);
-            })
-
 
     }
 
 
     return (
         <div>
-            <h1 className="text-3xl font-bold text-center my-4">Add Your Toy</h1>
+            <h1 className="text-3xl font-bold text-center my-4">Update Your Toy</h1>
 
 
-            <form onSubmit={handleAddToy} className="bg-blue-100 p-2 md:p-4 rounded my-5">
+            <form onSubmit={handleUpdateToy} className="bg-blue-100 p-2 md:p-4 rounded my-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Toy Name</span>
                         </label>
-                        <input type="text" name="toy_name" placeholder="enter your toy name" className="input input-bordered" required />
+                        <input type="text" name="toy_name" defaultValue={toy_name} className="input input-bordered" required />
                     </div>
 
                     <div className="form-control">
@@ -90,7 +89,7 @@ const AddToys = () => {
                         <label className="label">
                             <span className="label-text">Seller Name</span>
                         </label>
-                        <input type="text" name="seller_name" className="input input-bordered" placeholder="seller name" required />
+                        <input type="text" name="seller_name" className="input input-bordered" defaultValue={seller_name} required />
                     </div>
 
                     <div className="form-control">
@@ -104,47 +103,24 @@ const AddToys = () => {
                         <label className="label">
                             <span className="label-text">Toy Price</span>
                         </label>
-                        <input type="number" name="price" placeholder="enter yous toy's price" className="input input-bordered" required />
+                        <input type="number" name="price" defaultValue={price} className="input input-bordered" required />
                     </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Toy Ratings</span>
-                        </label>
-                        <input type="text" name="rating" placeholder="rating out of 5" className="input input-bordered" required />
-                    </div>
-
 
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Available Quantity</span>
                         </label>
-                        <input type="number" name="quantity" placeholder="enter toys quantity" className="input input-bordered" required />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Photo Url</span>
-                        </label>
-                        <input type="url" name="photo_url" placeholder="enter toys quantity" className="input input-bordered" required />
+                        <input type="number" name="quantity" defaultValue={quantity} className="input input-bordered" required />
                     </div>
 
-
-
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Details</span>
-                    </label>
-                    <input name="details" className="textarea" placeholder="Bio"></input>
                 </div>
 
                 <div className="form-control mt-6">
-                    <input className="btn btn-primary btn-block" type="submit" value="Upload" />
+                    <input className="btn btn-primary btn-block" type="submit" value="Update" />
                 </div>
             </form>
         </div>
     );
 };
 
-export default AddToys;
+export default UpdateToy;

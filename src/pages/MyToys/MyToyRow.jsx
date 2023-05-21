@@ -56,7 +56,7 @@ const MyToyRow = ({ mySingleToy, reload, setReload }) => {
             </td>
             <td>{category}</td>
             <th>
-                <Link >
+                <Link to={`/update/${_id}`} >
                     <button className="btn btn-info btn-xs me-1">Update</button>
                 </Link>
                 <Link onClick={() => handleDelete(_id)}>
