@@ -8,7 +8,7 @@ const Categories = () => {
     // console.log(carsData);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/cars/${category}`)
+        fetch(`https://toy-car-meraj-server.vercel.app/cars/${category}`)
         .then(res => res.json())
         .then( data => {
             console.log(data);

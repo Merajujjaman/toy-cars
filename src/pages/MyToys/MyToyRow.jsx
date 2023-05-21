@@ -18,7 +18,7 @@ const MyToyRow = ({ mySingleToy, reload, setReload }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log(id);
-                fetch(`http://localhost:5000/seller/${id}`, {
+                fetch(`https://toy-car-meraj-server.vercel.app/seller/${id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())

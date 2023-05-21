@@ -20,7 +20,7 @@ const SellerToyDetails = () => {
                     <p className="pb-2 text-xl font-bold">Category: {category}</p>
                     <p className="pb-2 text-xl font-bold">Quantity: {quantity}</p>
                     <p className="pb-2 text-xl font-bold">Seller: {seller_name}</p>
-                    <p className="pb-2 text-xl font-bold text-green-500">Price: {price}</p>
+                    <p className="pb-2 text-xl font-bold text-green-500">Price: ${price}</p>
                     <Link to='/'>
                         <button className="btn btn-primary">Back</button>
                     </Link>

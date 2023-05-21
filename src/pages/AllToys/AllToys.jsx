@@ -4,10 +4,13 @@ import ToyRow from "./ToyRow";
 
 const AllToys = () => {
     const [toys, setToys] = useState([])
+    const [search, setSearch] = useState('')
     
+    // console.log(search);
+
 
     useEffect(() => {
-        fetch('http://localhost:5000/addToy')
+        fetch('https://toy-car-meraj-server.vercel.app/addToy')
             .then(res => res.json())
             .then(data => {
                 setToys(data)
@@ -18,9 +21,24 @@ const AllToys = () => {
     }, [])
     console.log(toys);
 
+    const handleSearch = () => {
+        fetch(`https://toy-car-meraj-server.vercel.app/search/${search}`)
+            .then(res => res.json())
+            .then(data => {
+                setToys(data)
+            })
+            .catch(error => {
+                console.log(error);
+                
+            })
+    }
+
     return (
         <div className="my-8">
-            
+            <div className=" my-2">
+                <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Type here" className="input input-bordered input-accent w-full max-w-xs me-2" />
+                <button onClick={handleSearch} className="btn btn-info">search</button>
+            </div>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     {/* head */}
@@ -38,8 +56,8 @@ const AllToys = () => {
                         {/* row 1 */}
                         {
                             toys.map(toy => <ToyRow
-                            key={toy._id}
-                            toy={toy}
+                                key={toy._id}
+                                toy={toy}
                             ></ToyRow>)
                         }
                     </tbody>

@@ -33,7 +33,7 @@ const UpdateToy = () => {
         }
         console.log(updateToyData);
 
-        fetch(`http://localhost:5000/seller/${_id}`, {
+        fetch(`https://toy-car-meraj-server.vercel.app/seller/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
