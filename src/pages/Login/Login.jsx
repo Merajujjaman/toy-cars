@@ -8,7 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
     const [error, setError] = useState('')
-    const { loginWithEmail } = useContext(AuthContext)
+    const { loginWithEmail, googleLogin } = useContext(AuthContext)
 
     const handleLogin = e => {
         e.preventDefault()
@@ -24,7 +24,7 @@ const Login = () => {
                 setError('')
                 console.log(logedUser);
                 Swal.fire({
-                    position: 'middle',
+                    position: 'center',
                     icon: 'success',
                     title: 'Login Successfull...',
                     showConfirmButton: false,
@@ -36,6 +36,27 @@ const Login = () => {
                 setError(error.message)
             })
 
+    }
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                const logedUser = result.user;
+                setError('')
+                console.log(logedUser);
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Login Successfull...',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error.message)
+            })
     }
 
 
@@ -69,7 +90,8 @@ const Login = () => {
 
 
 
-                <button className="btn mb-4 btn-outline w-4/5 mx-auto "> <FcGoogle className="mx-2"></FcGoogle> Login with Google</button>
+                <button onClick={handleGoogleLogin} className="btn mb-4 btn-outline w-4/5 mx-auto "> <FcGoogle className="mx-2"></FcGoogle> Login with Google
+                </button>
 
 
             </div>
