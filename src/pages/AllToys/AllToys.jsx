@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ToyRow from "./ToyRow";
 
 
 const AllToys = () => {
@@ -28,21 +29,19 @@ const AllToys = () => {
                             <th>Toy Name</th>
                             <th>Seller</th>
                             <th>Price</th>
-                            <th>Category</th>
                             <th>Quantity</th>
+                            <th>Category</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        {/* {
-                            bookings.map(booking => <BookingRow
-                                key={booking._id}
-                                booking={booking}
-                                setLoad={setLoad}
-                                load={load}
-                            ></BookingRow>)
-                        } */}
+                        {
+                            toys.map(toy => <ToyRow
+                            key={toy._id}
+                            toy={toy}
+                            ></ToyRow>)
+                        }
                     </tbody>
 
                 </table>

@@ -15,6 +15,7 @@ const AddToys = () => {
         const seller_email = form.seller_email.value;
         const price = form.price.value;
         const rating = form.rating.value;
+        const quantity = form.quantity.value;
         const details = form.details.value;
         const photo = form.photo_url.value;
         // console.log(toy_name, seller_name, seller_email, category,price, rating,details, photo);
@@ -26,6 +27,7 @@ const AddToys = () => {
             seller_email,
             price,
             rating,
+            quantity,
             details,
             photo
         }
