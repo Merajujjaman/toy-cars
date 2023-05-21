@@ -10,6 +10,7 @@ import SellerToyDetails from "../pages/AllToys/SellerToyDetails";
 import PrivateRouts from "./PrivateRouts";
 import MyToys from "../pages/MyToys/MyToys";
 import UpdateToy from "../pages/MyToys/UpdateToy";
+import Blog from "../pages/Blog/Blog";
 
 const router = createBrowserRouter([
     {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
                 element: <UpdateToy></UpdateToy>,
                 loader: ({params}) => fetch(`https://toy-car-meraj-server.vercel.app/addToy/${params.id}`)
 
+            },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
             }
         ]
     },
