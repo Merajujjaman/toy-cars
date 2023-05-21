@@ -18,7 +18,9 @@ const Navbar = () => {
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link>Blog</Link></li>
-        <li><Link to ='/add'>Add Toys</Link></li>
+        {
+            user&& <li><Link to ='/add'>Add Toys</Link></li>
+        }
         <li><Link to='/allToys'>All Toys</Link></li>
 
     </>

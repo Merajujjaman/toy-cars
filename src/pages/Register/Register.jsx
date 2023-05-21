@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
 
@@ -7,6 +7,9 @@ import Swal from "sweetalert2";
 const Register = () => {
     const [error, setError] = useState('')
     const { createAccount } = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.pathname || '/';
 
     const handleRegister = e => {
         e.preventDefault()
@@ -23,6 +26,7 @@ const Register = () => {
                 console.log(user);
                 setError('')
                 form.reset()
+                navigate(from, { replace: true })
                 Swal.fire({
                     position: 'middle',
                     icon: 'success',

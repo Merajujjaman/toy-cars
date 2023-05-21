@@ -1,6 +1,6 @@
 
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
@@ -9,6 +9,9 @@ import { FcGoogle } from "react-icons/fc";
 const Login = () => {
     const [error, setError] = useState('')
     const { loginWithEmail, googleLogin } = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.pathname || '/'
 
     const handleLogin = e => {
         e.preventDefault()
@@ -23,6 +26,7 @@ const Login = () => {
                 form.reset()
                 setError('')
                 console.log(logedUser);
+                navigate(from, { replace: true })
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -44,6 +48,7 @@ const Login = () => {
                 const logedUser = result.user;
                 setError('')
                 console.log(logedUser);
+                navigate(from, { replace: true })
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -84,7 +89,7 @@ const Login = () => {
                 </form>
                 {error && <p className="text-center text-error font-bold">{error}</p>
                 }
-                <p className='text-center mb-4'>Don not have an accout? <Link className='font-bold text-info' to='/register'>Create Account</Link></p>
+                <p className='text-center mb-4'>Don not have an accout? <Link className='font-bold text-info' state={location?.state} to='/register'>Create Account</Link></p>
 
                 <div className="divider">OR</div>
 
