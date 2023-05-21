@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from '../../assets/logo-f.jpg'
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
@@ -6,10 +6,13 @@ import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const handleLogeOut = () => {
+        navigate('/')
         logOut()
-            .then(() => { })
+            .then(() => { 
+            })
             .catch(error => {
                 console.log(error);
             })
@@ -18,10 +21,13 @@ const Navbar = () => {
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link>Blog</Link></li>
+        <li><Link to='/allToys'>All Toys</Link></li>
         {
             user&& <li><Link to ='/add'>Add Toys</Link></li>
         }
-        <li><Link to='/allToys'>All Toys</Link></li>
+        {
+            user&& <li><Link to='/myToys'>My Toys</Link></li>
+        }
 
     </>
     return (
@@ -48,7 +54,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     { user&&
-                        <FaUserCircle className="text-4xl me-4 "></FaUserCircle>    
+                        <FaUserCircle title={user&& user?.email} className="text-4xl me-4 "></FaUserCircle>    
                     }
                     {user ?
                         <Link onClick={handleLogeOut} className="btn btn-outline btn-primary">log Out</Link>
