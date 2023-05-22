@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
+import useTitle from "../hooks/useTitle";
 
 const AddToys = () => {
+    useTitle('Add Toys')
     const { user } = useContext(AuthContext)
 
     const handleAddToy = e => {
@@ -136,7 +138,7 @@ const AddToys = () => {
                     <label className="label">
                         <span className="label-text">Details</span>
                     </label>
-                    <input name="details" className="textarea" placeholder="Bio"></input>
+                    <input name="details" className="textarea" placeholder="toy description"></input>
                 </div>
 
                 <div className="form-control mt-6">

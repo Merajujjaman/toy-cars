@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import ToyRow from "./ToyRow";
+import useTitle from "../hooks/useTitle";
 
 
 const AllToys = () => {
     const [toys, setToys] = useState([])
     const [search, setSearch] = useState('')
+    useTitle('All Toys')
     
     // console.log(search);
 
@@ -34,7 +36,7 @@ const AllToys = () => {
     }
 
     return (
-        <div className="my-8">
+        <div className="my-8  min-h-screen">
             <div className=" my-2">
                 <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Type here" className="input input-bordered input-accent w-full max-w-xs me-2" />
                 <button onClick={handleSearch} className="btn btn-info">search</button>

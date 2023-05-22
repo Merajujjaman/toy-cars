@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
 import MyToyRow from "./MyToyRow";
+import useTitle from "../hooks/useTitle";
 
 const MyToys = () => {
+    useTitle('My toys')
     const [myToyaData, setMyToyData] = useState([])
     const { user } = useContext(AuthContext)
     const [reload, setReload] = useState(false)
@@ -21,7 +23,7 @@ const MyToys = () => {
     console.log(myToyaData);
 
     return (
-        <div className="my-8">
+        <div className="my-8 min-h-screen">
             
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
