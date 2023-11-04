@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* BackgroundVideo.css */
+@keyframes gradientAnimation {
+    0% {
+      background: linear-gradient(45deg, #f06, #ff0, #0ff, #f06);
+      background-size: 400% 400%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    100% {
+      background: linear-gradient(45deg, #f06, #ff0, #0ff, #f06);
+      background-size: 400% 400%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  
+  .animated-gradient {
+    animation: gradientAnimation 4s linear infinite;
+  }
+
+
+  

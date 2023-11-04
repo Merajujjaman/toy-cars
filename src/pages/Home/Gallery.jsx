@@ -4,8 +4,7 @@ import Marquee from "react-fast-marquee";
 const Gallery = () => {
     return (
         <div className="my-10">
-            <h1 className="text-center text-green-500 text-3xl font-bold my-5">Gallery</h1>
-            <hr className="border-2 mb-5"/>
+            <h1 className="text-center text-transparent animated-gradient text-3xl md:text-5xl font-bold my-5 md:my-10">Gallery</h1>
             <div className="mb-10">
                 <Marquee speed={100} direction='right'>
                     <div className="card card-compact w-48 h-48 mx-5 bg-base-100 ">
@@ -52,7 +51,6 @@ const Gallery = () => {
 
                 </div>
             </Marquee>
-            <hr className="border-2 my-5"/>
         </div>
     );
 };
